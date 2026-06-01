@@ -1,0 +1,40 @@
+# ── Python ──────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual Environment ─────────────────
+venv/
+.venv/
+env/
+
+# ── Scraped Data (DO NOT push images) ───
+dataset/
+test_out/
+
+# ── Logs ────────────────────────────────
+*.log
+
+# ── OS Junk ─────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Test & Debug Files ──────────────────
+test_*.py
+total_files.py
+ddg.html
+ddg.png
+freepik_test.png
+magnific_test.png
+
+# ── IDE ─────────────────────────────────
+.vscode/
+.idea/
+
+# ── Misc ────────────────────────────────
+*.pdf
+design1.jpeg

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OmniScrape — Advanced image scraping and dataset building pipeline.">
+    <title>OmniScrape | Advanced Scraper</title>
+    <!-- Google Fonts: Montserrat for Headings, Inter for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header__center">
+            <h1 class="header__title">OMNISCRAPE</h1>
+            <p class="header__subtitle">ELITE IMAGE HARVESTING & DEDUPLICATION ENGINE</p>
+        </div>
+        <div class="header__right">
+            <a href="#builder-card">PROJECTS</a>
+            <a href="#datasets-section">DATASETS</a>
+        </div>
+    </header>
+
+    <!-- Builder Form -->
+    <section class="builder-section panel" id="builder-card">
+        <h2 class="section-title">NEW HARVEST</h2>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="topic-input">SEARCH TOPIC</label>
+                <input type="text" id="topic-input" class="input-field" placeholder="e.g. brutalist architecture, modern art" autocomplete="off">
+            </div>
+            <div class="form-group limit-group">
+                <label>IMAGES PER SOURCE</label>
+                <div class="limit-display">
+                    <input type="range" id="limit-slider" min="5" max="5000" value="50" step="25">
+                    <span class="value" id="limit-value">50</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="output-dir">CUSTOM FOLDER</label>
+                <input type="text" id="output-dir" class="input-field" placeholder="Optional absolute path">
+            </div>
+        </div>
+        
+        <div class="source-row" id="source-row">
+            <label class="source-chip active" data-source="unsplash">
+                <input type="checkbox" checked>
+                <span class="chip-label">UNSPLASH</span>
+            </label>
+            <label class="source-chip active" data-source="pexels">
+                <input type="checkbox" checked>
+                <span class="chip-label">PEXELS</span>
+            </label>
+            <label class="source-chip active" data-source="pixabay">
+                <input type="checkbox" checked>
+                <span class="chip-label">PIXABAY</span>
+            </label>
+            <label class="source-chip active" data-source="pinterest">
+                <input type="checkbox" checked>
+                <span class="chip-label">PINTEREST</span>
+            </label>
+        </div>
+
+        <div class="action-row">
+            <button class="btn-ghost" id="build-btn" onclick="startBuild()">
+                <div class="spinner"></div>
+                <span class="btn-text">INITIALIZE BUILD</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Stop Controls (hidden until build starts) -->
+    <section class="stop-section panel" id="stop-section">
+        <h2 class="section-title">ACTIVE OPERATION</h2>
+        <div class="stop-controls">
+            <button class="btn-ghost btn-danger" id="stop-all-btn" onclick="stopAll()">
+                ABORT ALL
+            </button>
+            <div class="stop-granular">
+                <div class="stop-group" id="stop-sources">
+                    <span class="stop-label">TARGET:</span>
+                    <!-- Populated dynamically -->
+                </div>
+                <div class="stop-group" id="stop-topics">
+                    <span class="stop-label">TOPIC:</span>
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="two-column-layout">
+        <!-- Live Log -->
+        <section class="log-section panel" id="log-section">
+            <h2 class="section-title">TERMINAL</h2>
+            <div class="log-terminal" id="log-terminal"></div>
+        </section>
+
+        <!-- Live Gallery -->
+        <section class="gallery-section panel" id="gallery-section">
+            <div class="gallery-header">
+                <h2 class="section-title">INVENTORY</h2>
+                <div class="gallery-count"><span id="gallery-count">0</span> ASSETS</div>
+            </div>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </div>
+
+    <!-- Existing Datasets -->
+    <section class="datasets-section panel" id="datasets-section">
+        <h2 class="section-title">YOUR DATASETS</h2>
+        <div class="dataset-list" id="dataset-list">
+            <div class="empty-state" id="empty-state">
+                <p>NO ASSETS FOUND IN DIRECTORY.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <p>OmniScrape | Engine Ready</p>
+    </footer>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox__close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="Preview">
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
