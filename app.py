@@ -7,6 +7,8 @@ import queue
 import time
 from io import StringIO
 from flask import Flask, send_from_directory, jsonify, request, Response
+import subprocess
+
 
 # Add project root to path
 sys.path.insert(0, os.path.dirname(__file__))
@@ -17,6 +19,42 @@ from dataset_builder.collectors.pixabay import PixabayCollector
 from dataset_builder.collectors.pinterest import PinterestCollector
 from dataset_builder.cleaner import AutomaticCleaner
 from dataset_builder.metadata import MetadataGenerator
+
+def ensure_playwright_browser():
+    """
+    Ensure Chromium required by Playwright is installed.
+    If missing, download it automatically.
+    """
+
+    try:
+        from playwright.sync_api import sync_playwright
+
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            browser.close()
+
+        print("✓ Playwright Chromium already installed")
+
+    except Exception:
+        print("⚠ Chromium not found. Installing automatically...")
+
+        try:
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "playwright",
+                    "install",
+                    "chromium"
+                ],
+                check=True
+            )
+
+            print("✓ Chromium installed successfully")
+
+        except Exception as e:
+            print(f"❌ Failed to install Chromium: {e}")
+            raise
 
 app = Flask(__name__, static_folder='static')
 
@@ -275,4 +313,9 @@ def delete_dataset(topic):
 
 if __name__ == '__main__':
     os.makedirs(BASE_DATASET_DIR, exist_ok=True)
+
+    # Prevent double installation when Flask reloads
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true" or not app.debug:
+        ensure_playwright_browser()
+
     app.run(debug=True, port=5001, threaded=True)
