@@ -31,9 +31,30 @@ OmniScrape is a powerful, self-hosted web scraping tool that collects high-resol
 
 ### Installation
 
+#Windows (PowerShell)
+git clone https://github.com/adityagoswami1/OmniScrape.git
+cd OmniScrape
+
+python -m venv venv
+
+.\venv\Scripts\Activate.ps1
+
+pip install -r requirements.txt
+
+playwright install chromium
+
+python app.py
+
+If PowerShell blocks script execution, run:
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Then activate the virtual environment again.
+
+#MacOs/ Linux
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/OmniScrape.git
+git clone https://github.com/adityagoswami1/OmniScrape.git
 cd OmniScrape
 
 # Create a virtual environment
