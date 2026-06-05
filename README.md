@@ -25,31 +25,345 @@ OmniScrape is a powerful, self-hosted web scraping tool that collects high-resol
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.9+
-- pip
+# OmniScrape - Beginner Setup Guide (Windows)
 
-### Installation
+## Prerequisites
 
-#Windows (PowerShell)
+Before running OmniScrape, make sure the following are installed:
+
+* Python 3.11 or later
+* Git (optional if downloading ZIP)
+* Internet connection (required for installing dependencies and Playwright browsers)
+
+---
+
+# Step 1: Download the Project
+
+## Option A: Using Git (Recommended)
+
+Open PowerShell and run:
+
+```powershell
+git clone https://github.com/adityagoswami1/OmniScrape.git
+cd OmniScrape
+```
+
+### If you get:
+
+```text
+git : The term 'git' is not recognized
+```
+
+Git is not installed.
+
+Install Git from:
+
+https://git-scm.com/download/win
+
+After installation:
+
+1. Close PowerShell
+2. Open PowerShell again
+3. Run:
+
+```powershell
+git --version
+```
+
+If a version number appears, Git is installed correctly.
+
+---
+
+## Option B: Download ZIP
+
+1. Open the GitHub repository.
+2. Click **Code → Download ZIP**.
+3. Extract the ZIP file.
+4. Open the extracted folder.
+
+---
+
+# Step 2: Verify Python Installation
+
+Open PowerShell and run:
+
+```powershell
+python --version
+```
+
+or
+
+```powershell
+py --version
+```
+
+Expected output:
+
+```text
+Python 3.x.x
+```
+
+---
+
+## If Python is not found
+
+Example error:
+
+```text
+Python was not found
+```
+
+Install Python from:
+
+https://www.python.org/downloads/windows/
+
+IMPORTANT:
+
+During installation, enable:
+
+```text
+✓ Add Python to PATH
+```
+
+After installation:
+
+1. Close PowerShell
+2. Open a new PowerShell window
+3. Run:
+
+```powershell
+py --version
+```
+
+---
+
+# Step 3: Open PowerShell in the Project Folder
+
+Navigate to the OmniScrape folder.
+
+Example:
+
+```powershell
+cd C:\Users\YourName\Downloads\OmniScrape-main
+```
+
+Verify you are inside the project:
+
+```powershell
+dir
+```
+
+You should see files such as:
+
+```text
+app.py
+requirements.txt
+README.md
+```
+
+---
+
+# Step 4: Create a Virtual Environment
+
+Create an isolated Python environment:
+
+```powershell
+py -m venv venv
+```
+
+Activate it:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+After activation you should see:
+
+```text
+(venv)
+```
+
+at the beginning of your terminal line.
+
+---
+
+## If PowerShell Blocks Activation
+
+You may see an execution policy error.
+
+Run:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Then activate again:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+---
+
+# Step 5: Install Project Dependencies
+
+Install required Python packages:
+
+```powershell
+pip install -r requirements.txt
+```
+
+Wait for installation to complete.
+
+---
+
+## If Flask Error Appears
+
+If you see:
+
+```text
+ModuleNotFoundError: No module named 'flask'
+```
+
+Install Flask manually:
+
+```powershell
+pip install flask
+```
+
+Then run the application again.
+
+Note:
+This usually indicates Flask is missing from requirements.txt.
+
+---
+
+# Step 6: Install Playwright Browser
+
+OmniScrape uses Playwright for browser automation.
+
+Install Chromium:
+
+```powershell
+py -m playwright install chromium
+```
+
+This may take several minutes on the first run.
+
+---
+
+# Step 7: Run the Application
+
+Start OmniScrape:
+
+```powershell
+py app.py
+```
+
+Expected output should indicate that the Flask server has started successfully.
+
+---
+
+# Common Issues
+
+## Git Not Found
+
+Error:
+
+```text
+git : The term 'git' is not recognized
+```
+
+Solution:
+
+Install Git and restart PowerShell.
+
+---
+
+## Python Not Found
+
+Error:
+
+```text
+Python was not found
+```
+
+Solution:
+
+Install Python and ensure "Add Python to PATH" is enabled.
+
+---
+
+## Virtual Environment Won't Activate
+
+Error:
+
+```text
+running scripts is disabled on this system
+```
+
+Solution:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+---
+
+## Missing Python Package
+
+Error:
+
+```text
+ModuleNotFoundError
+```
+
+Example:
+
+```text
+No module named 'flask'
+```
+
+Solution:
+
+```powershell
+pip install <package-name>
+```
+
+or update requirements.txt to include the missing dependency.
+
+---
+
+# Updating Dependencies
+
+After installing additional packages:
+
+```powershell
+pip freeze > requirements.txt
+```
+
+This ensures future users install all required packages automatically.
+
+---
+
+# Complete Installation Commands
+
+For users who already have Python installed:
+
+```powershell
 git clone https://github.com/adityagoswami1/OmniScrape.git
 cd OmniScrape
 
-python -m venv venv
+py -m venv venv
 
 .\venv\Scripts\Activate.ps1
 
 pip install -r requirements.txt
 
-playwright install chromium
+py -m playwright install chromium
 
-python app.py
-
-If PowerShell blocks script execution, run:
-
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-Then activate the virtual environment again.
+py app.py
+```
 
 #MacOs/ Linux
 ```bash
